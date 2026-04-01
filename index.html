@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KODEE — You Describe It. We Build It.</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #1B4FD8;
+    --blue-dark: #1340B8;
+    --blue-light: #EEF3FF;
+    --blue-mid: #3D6AE8;
+    --amber: #F5A623;
+    --amber-light: #FFF8EC;
+    --black: #0D0D0D;
+    --white: #FFFFFF;
+    --gray: #F7F7F7;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --text: #111827;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* LOGO SVG COMPONENT */
+  .kodee-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0px;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.1em;
+    height: 1.1em;
+    background: var(--blue);
+    border-radius: 0.25em;
+    margin: 0 0.08em;
+    position: relative;
+    top: -0.02em;
+  }
+
+  .logo-icon svg {
+    width: 0.6em;
+    height: 0.6em;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--blue); }
+
+  .btn-nav {
+    background: var(--blue);
+    color: white !important;
+    padding: 0.55rem 1.3rem;
+    border-radius: 8px;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+
+  .btn-nav:hover { background: var(--blue-dark) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 9rem 2rem 5rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  /* Binary pattern background */
+  .binary-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.04;
+  }
+
+  .binary-row {
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    color: var(--blue);
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 700px; height: 400px;
+    background: radial-gradient(ellipse at center top, rgba(27,79,216,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--blue-light);
+    border: 1px solid rgba(27,79,216,0.2);
+    color: var(--blue);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 1.75rem;
+    letter-spacing: 0.04em;
+    position: relative;
+  }
+
+  .live-dot {
+    width: 7px; height: 7px;
+    background: var(--amber);
+    border-radius: 50%;
+    animation: livepulse 1.8s infinite;
+  }
+
+  @keyframes livepulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,166,35,0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(245,166,35,0); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.5rem;
+    max-width: 16ch;
+    position: relative;
+  }
+
+  .hero h1 .line-blue { color: var(--blue); }
+
+  .hero-sub {
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    color: var(--muted);
+    max-width: 54ch;
+    font-weight: 400;
+    margin-bottom: 2.75rem;
+    line-height: 1.75;
+    position: relative;
+  }
+
+  .hero-sub strong { color: var(--text); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.875rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+  }
+
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 0.9rem 1.875rem;
+    border-radius: 10px;
+    font-size: 0.975rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 14px rgba(27,79,216,0.3);
+  }
+
+  .btn-primary:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27,79,216,0.4);
+  }
+
+  .btn-secondary {
+    background: white;
+    color: var(--text);
+    padding: 0.9rem 1.875rem;
+    border-radius: 10px;
+    font-size: 0.975rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .hero-trust {
+    margin-top: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 400;
+    position: relative;
+  }
+
+  .avatar-stack { display: flex; }
+
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-left: -7px;
+  }
+
+  .avatar:first-child { margin-left: 0; }
+
+  /* TICKER */
+  .ticker {
+    background: var(--blue);
+    padding: 0.875rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-track {
+    display: inline-flex;
+    animation: scroll 22s linear infinite;
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 2rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .ticker-sep {
+    color: var(--amber);
+    font-size: 1rem;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* SECTIONS */
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  section { padding: 5rem 2rem; }
+
+  .label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.875rem;
+  }
+
+  .label::before {
+    content: '';
+    width: 16px; height: 2px;
+    background: var(--blue);
+    border-radius: 2px;
+  }
+
+  h2.section-title {
+    font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 52ch;
+    line-height: 1.75;
+  }
+
+  /* PAIN vs SOLUTION */
+  .pain-section {
+    background: var(--black);
+    padding: 5rem 2rem;
+  }
+
+  .pain-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .pain-col-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .pain-col-label.before { color: rgba(255,255,255,0.3); }
+  .pain-col-label.after { color: var(--amber); }
+
+  .pain-section h2.section-title { color: white; margin-bottom: 0.5rem; }
+  .pain-section .section-desc { color: rgba(255,255,255,0.45); margin-bottom: 3rem; }
+  .pain-section .label { color: rgba(245,166,35,0.8); }
+  .pain-section .label::before { background: var(--amber); }
+
+  .list-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.875rem 1.125rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    font-weight: 400;
+  }
+
+  .list-item.pain-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.65);
+  }
+
+  .list-item.win-item {
+    background: rgba(27,79,216,0.15);
+    border: 1px solid rgba(27,79,216,0.3);
+    color: rgba(255,255,255,0.85);
+  }
+
+  .item-icon {
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    width: 18px;
+    text-align: center;
+  }
+
+  .pain-x { color: #F87171; }
+  .win-check { color: var(--amber); }
+
+  /* WHO IS THIS FOR */
+  .who-section { background: var(--gray); }
+
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+
+  .who-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    padding: 1.875rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .who-card:hover {
+    border-color: var(--blue);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(27,79,216,0.1);
+  }
+
+  .who-icon {
+    width: 48px; height: 48px;
+    background: var(--blue-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.375rem;
+  }
+
+  .who-card h3 {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .who-card p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .who-tag {
+    display: inline-block;
+    background: var(--amber-light);
+    color: #92400E;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.625rem;
+    border-radius: 100px;
+    margin-bottom: 0.875rem;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: white; }
+
+  .how-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .steps { margin-top: 2.5rem; }
+
+  .step {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .step:last-child { border-bottom: none; }
+
+  .step-num {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: 0.06em;
+    min-width: 24px;
+    margin-top: 0.25rem;
+  }
+
+  .step h4 {
+    font-weight: 700;
+    font-size: 0.975rem;
+    margin-bottom: 0.3rem;
+    color: var(--text);
+  }
+
+  .step p {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* DEMO VISUAL */
+  .demo-card {
+    background: var(--black);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  }
+
+  .demo-topbar {
+    background: #1A1A1A;
+    padding: 0.875rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid #2A2A2A;
+  }
+
+  .dot-red { width: 10px; height: 10px; border-radius: 50%; background: #FF5F57; }
+  .dot-yellow { width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E; }
+  .dot-green { width: 10px; height: 10px; border-radius: 50%; background: #28C840; }
+
+  .demo-topbar-title {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.35);
+    font-weight: 500;
+  }
+
+  .demo-body { padding: 1.5rem; }
+
+  .chat-row { margin-bottom: 1.125rem; }
+
+  .chat-who {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .chat-who.kodee-who { color: rgba(27,79,216,0.7); }
+
+  .bubble {
+    display: inline-block;
+    padding: 0.75rem 1rem;
+    border-radius: 10px 10px 10px 3px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.8);
+    background: #1E1E1E;
+    border: 1px solid #2E2E2E;
+    max-width: 90%;
+    font-weight: 300;
+  }
+
+  .bubble.kodee {
+    background: rgba(27,79,216,0.2);
+    border: 1px solid rgba(27,79,216,0.35);
+    border-radius: 10px 10px 3px 10px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .scope-box {
+    background: #141414;
+    border: 1px solid #2A2A2A;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+
+  .scope-title {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.75rem;
+  }
+
+  .scope-row {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #222;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  .scope-row:last-child { border-bottom: none; }
+
+  .scope-check {
+    width: 15px; height: 15px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 0.5rem;
+    color: white;
+    font-weight: 700;
+  }
+
+  /* WORKSHOP */
+  .workshop-section {
+    background: var(--amber);
+    padding: 5rem 2rem;
+  }
+
+  .workshop-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+
+  .workshop-section .label { color: rgba(0,0,0,0.5); }
+  .workshop-section .label::before { background: rgba(0,0,0,0.4); }
+
+  .workshop-section h2.section-title { color: var(--black); }
+
+  .workshop-section .section-desc {
+    color: rgba(0,0,0,0.6);
+    margin-bottom: 2rem;
+  }
+
+  .ws-details {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .ws-detail { display: flex; flex-direction: column; gap: 0.2rem; }
+
+  .ws-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(0,0,0,0.45);
+  }
+
+  .ws-value {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -0.01em;
+  }
+
+  .btn-dark {
+    background: var(--black);
+    color: white;
+    padding: 0.9rem 1.875rem;
+    border-radius: 10px;
+    font-size: 0.975rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .btn-dark:hover { background: #222; transform: translateY(-2px); }
+
+  /* KODEE BINARY DECORATIVE */
+  .binary-card {
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.12);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 280px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: rgba(0,0,0,0.25);
+    line-height: 1.7;
+    letter-spacing: 0.1em;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .binary-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(transparent, rgba(245,166,35,0.8));
+    pointer-events: none;
+  }
+
+  .binary-highlight {
+    color: var(--black);
+    font-weight: 700;
+    font-size: 13px;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials-section { background: var(--gray); }
+
+  .testimonials-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+
+  .t-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    gap: 2rem;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .t-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.875rem;
+    border: 1.5px solid var(--border);
+    transition: all 0.25s;
+  }
+
+  .t-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
+
+  .t-stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .star {
+    width: 14px; height: 14px;
+    background: var(--amber);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+
+  .t-quote {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text);
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .t-author {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .t-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+
+  .t-name { font-weight: 700; font-size: 0.875rem; color: var(--text); }
+  .t-role { font-size: 0.78rem; color: var(--muted); }
+
+  /* FINAL CTA */
+  .final-cta {
+    background: var(--blue);
+    padding: 7rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* binary pattern on final cta */
+  .final-binary {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.06;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: white;
+    letter-spacing: 0.15em;
+    line-height: 1.8;
+    overflow: hidden;
+  }
+
+  .final-cta h2 {
+    font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+    position: relative;
+  }
+
+  .final-cta h2 .amber { color: var(--amber); }
+
+  .final-cta p {
+    color: rgba(255,255,255,0.65);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    position: relative;
+    max-width: 50ch;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .final-actions {
+    display: flex;
+    gap: 0.875rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .btn-white {
+    background: white;
+    color: var(--blue);
+    padding: 0.9rem 1.875rem;
+    border-radius: 10px;
+    font-size: 0.975rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-white:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.75);
+    padding: 0.9rem 1.875rem;
+    border-radius: 10px;
+    font-size: 0.975rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: white; color: white; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    padding: 2.5rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #1E1E1E;
+  }
+
+  .footer-kodee {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  .footer-kodee .f-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em; height: 1em;
+    background: var(--blue);
+    border-radius: 0.2em;
+    margin: 0 0.06em;
+    position: relative;
+    top: -0.02em;
+  }
+
+  .footer-kodee .f-icon svg { width: 0.55em; height: 0.55em; }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-size: 0.825rem;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-badge { animation-delay: 0s; }
+  .hero h1 { animation-delay: 0.1s; }
+  .hero-sub { animation-delay: 0.2s; }
+  .hero-actions { animation-delay: 0.3s; }
+  .hero-trust { animation-delay: 0.4s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 860px) {
+    nav { padding: 1rem 1.25rem; }
+    nav ul { display: none; }
+    section { padding: 3.5rem 1.25rem; }
+    .hero { padding: 7rem 1.25rem 3.5rem; }
+    .pain-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .who-grid { grid-template-columns: 1fr; }
+    .how-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .workshop-inner { flex-direction: column; }
+    .binary-card { display: none; }
+    footer { flex-direction: column; gap: 1.25rem; text-align: center; padding: 2rem 1.25rem; }
+    .t-header { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <!-- Kodee Logo recreation -->
+  <a href="#" class="kodee-logo" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;color:var(--blue);font-size:1.5rem;letter-spacing:-0.02em;text-decoration:none;">
+    k<span style="display:inline-flex;align-items:center;justify-content:center;width:1.05em;height:1.05em;background:var(--blue);border-radius:0.22em;margin:0 0.05em;position:relative;top:0.05em;"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:0.58em;height:0.58em;"><path d="M5 4L2 8L5 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 4L14 8L11 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>dee
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#who">Who it's for</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#workshop">Workshop</a></li>
+    <li><a href="#contact" class="btn-nav">Book a build call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="binary-bg" aria-hidden="true">
+    <div class="binary-row">0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1</div>
+    <div class="binary-row">1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0</div>
+    <div class="binary-row">0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1</div>
+    <div class="binary-row">1 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 0 0 1 1 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1</div>
+    <div class="binary-row">0 0 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1</div>
+    <div class="binary-row">1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0</div>
+    <div class="binary-row">0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1</div>
+  </div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-badge">
+    <span class="live-dot"></span>
+    Workshop · 14 April · Singapore
+  </div>
+
+  <h1>You describe it.<br><span class="line-blue">We build it.</span></h1>
+
+  <p class="hero-sub">
+    KODEE is the build partner for <strong>coaches, consultants, and agency owners</strong> who have a business problem and no technical background. Plain English in. Working tool out.
+  </p>
+
+  <div class="hero-actions">
+    <a href="#workshop" class="btn-primary">
+      Join the workshop — 14 April
+      <span>→</span>
+    </a>
+    <a href="#contact" class="btn-secondary">
+      Book a free build call
+    </a>
+  </div>
+
+  <div class="hero-trust">
+    <div class="avatar-stack">
+      <div class="avatar">AK</div>
+      <div class="avatar">RL</div>
+      <div class="avatar">MT</div>
+      <div class="avatar">SP</div>
+    </div>
+    <span>Trusted by service business owners across Singapore</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item">Client onboarding tools <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Branded quiz builders <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Automated proposal workflows <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Client portals <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Lead capture tools <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Internal dashboards <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Digital assessments <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Booking systems <span class="ticker-sep">·</span></span>
+    <!-- duplicate -->
+    <span class="ticker-item">Client onboarding tools <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Branded quiz builders <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Automated proposal workflows <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Client portals <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Lead capture tools <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Internal dashboards <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Digital assessments <span class="ticker-sep">·</span></span>
+    <span class="ticker-item">Booking systems <span class="ticker-sep">·</span></span>
+  </div>
+</div>
+
+<!-- PAIN vs SOLUTION -->
+<section class="pain-section">
+  <div class="pain-inner">
+    <div>
+      <p class="label">The problem</p>
+      <h2 class="section-title">Sound familiar?</h2>
+      <p class="section-desc">Most service business owners know exactly what they need built. They just don't know how to build it — and every path forward looks expensive or complicated.</p>
+      <p class="pain-col-label before" style="margin-top:2rem;">What's holding you back</p>
+      <div class="list-items">
+        <div class="list-item pain-item"><span class="item-icon pain-x">✕</span>You've been onboarding clients over WhatsApp for way too long</div>
+        <div class="list-item pain-item"><span class="item-icon pain-x">✕</span>A developer quoted you $20,000 for something basic</div>
+        <div class="list-item pain-item"><span class="item-icon pain-x">✕</span>You've been "planning to build" for the past 6 months</div>
+        <div class="list-item pain-item"><span class="item-icon pain-x">✕</span>You don't know what to ask for or how to brief anyone technical</div>
+        <div class="list-item pain-item"><span class="item-icon pain-x">✕</span>You want to look more professional but don't know where to start</div>
+      </div>
+    </div>
+    <div>
+      <p class="label" style="opacity:0;pointer-events:none;">spacer</p>
+      <h2 class="section-title">What changes with KODEE</h2>
+      <p class="section-desc">Describe the problem in plain English. KODEE figures out what to build, scopes it clearly, and delivers a working tool — fast.</p>
+      <p class="pain-col-label after" style="margin-top:2rem;">What you get instead</p>
+      <div class="list-items">
+        <div class="list-item win-item"><span class="item-icon win-check">✓</span>A proper onboarding tool your clients actually use</div>
+        <div class="list-item win-item"><span class="item-icon win-check">✓</span>A working build for a fraction of traditional dev costs</div>
+        <div class="list-item win-item"><span class="item-icon win-check">✓</span>A clear plan and timeline — no more endless waiting</div>
+        <div class="list-item win-item"><span class="item-icon win-check">✓</span>A build partner who speaks your language, not tech jargon</div>
+        <div class="list-item win-item"><span class="item-icon win-check">✓</span>A tool that makes your business look exactly as good as it is</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section class="who-section" id="who">
+  <div class="container">
+    <p class="label">Who it's for</p>
+    <h2 class="section-title">Built for service businesses<br>with something to fix</h2>
+    <p class="section-desc">If you run a service business and you're tired of doing manually what a simple tool could do automatically — KODEE was built for you.</p>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="who-tag">Most popular</span>
+        <div class="who-icon">🎯</div>
+        <h3>Coaches & Consultants</h3>
+        <p>Great service, messy systems. Build a branded onboarding flow, client quiz, or progress tracker — without hiring anyone technical or learning to code.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏢</div>
+        <h3>Agency Owners</h3>
+        <p>A client portal. Automated reporting. A branded tool that makes your agency look like it has a full tech team behind it. Without the team.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">⚙️</div>
+        <h3>Service Business Owners</h3>
+        <p>Still tracking on spreadsheets and following up on WhatsApp? Build the tool that digitises your most painful manual process — fast and affordably.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="how-inner">
+    <div>
+      <p class="label">How it works</p>
+      <h2 class="section-title">From a plain English<br>description to a working tool</h2>
+      <p class="section-desc">No technical knowledge needed. No developer interviews. No project briefs full of jargon you don't understand.</p>
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <h4>Tell us what's broken</h4>
+            <p>Describe the problem in plain English. What are you doing manually right now that wastes your time or makes you look less professional than you are?</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <h4>We scope what to build</h4>
+            <p>KODEE translates your problem into a clear build plan. You see exactly what will be built, what it will do, and what it costs — before committing.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <h4>We build it. Fast.</h4>
+            <p>Most projects delivered in 2–3 weeks. Not months. You're kept in the loop in plain English throughout — no technical surprises.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div>
+            <h4>You use it from day one</h4>
+            <p>Your tool is built to be used immediately — handed over ready to run, not as a complicated project needing another developer to maintain.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <div class="demo-topbar">
+        <span class="dot-red"></span>
+        <span class="dot-yellow"></span>
+        <span class="dot-green"></span>
+        <span class="demo-topbar-title">KODEE · Build Conversation</span>
+      </div>
+      <div class="demo-body">
+        <div class="chat-row">
+          <p class="chat-who">Founder</p>
+          <div class="bubble">"I'm a business coach and I still onboard clients over WhatsApp. It takes hours every week and looks unprofessional. I need something automatic."</div>
+        </div>
+        <div class="chat-row" style="text-align:right;">
+          <p class="chat-who kodee-who" style="text-align:right;">KODEE</p>
+          <div class="bubble kodee" style="display:inline-block;text-align:left;">"Got it. Here's what we'd build for you based on what you've described."</div>
+        </div>
+        <div class="scope-box">
+          <p class="scope-title">Your build scope</p>
+          <div class="scope-row"><span class="scope-check">✓</span>Branded onboarding form clients complete before session 1</div>
+          <div class="scope-row"><span class="scope-check">✓</span>Automatic welcome email + document delivery</div>
+          <div class="scope-row"><span class="scope-check">✓</span>Simple client dashboard to track progress</div>
+          <div class="scope-row"><span class="scope-check">✓</span>Timeline: 2 weeks · Investment: from $5,000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKSHOP -->
+<section class="workshop-section" id="workshop">
+  <div class="workshop-inner">
+    <div>
+      <p class="label">Upcoming workshop</p>
+      <h2 class="section-title">Build the tool your business<br>actually needs — in one day</h2>
+      <p class="section-desc">A hands-on workshop for service business owners who want to automate or digitise part of their business. No coding. No developers. No jargon. You leave with a working prototype and a clear next step.</p>
+
+      <div class="ws-details">
+        <div class="ws-detail">
+          <span class="ws-label">Date</span>
+          <span class="ws-value">14 April 2025</span>
+        </div>
+        <div class="ws-detail">
+          <span class="ws-label">Format</span>
+          <span class="ws-value">In-person · SG</span>
+        </div>
+        <div class="ws-detail">
+          <span class="ws-label">Spots</span>
+          <span class="ws-value">Limited</span>
+        </div>
+      </div>
+
+      <a href="#contact" class="btn-dark">Reserve my spot →</a>
+    </div>
+
+    <div class="binary-card" aria-hidden="true">
+      0 1 0 0 1 1 0 1 0 1<br>
+      1 0 1 1 0 0 1 0 1 0<br>
+      0 1 <span class="binary-highlight">BUILD</span> 0 1 0 1<br>
+      1 1 0 1 0 1 0 0 1 1<br>
+      0 0 1 0 1 0 1 1 0 0<br>
+      1 0 1 <span class="binary-highlight">YOUR</span> 0 0 1 0<br>
+      0 1 0 0 1 1 0 1 0 1<br>
+      1 1 0 0 1 0 1 <span class="binary-highlight">IDEA</span><br>
+      0 0 1 0 1 0 1 1 0 0<br>
+      1 0 1 1 0 0 1 0 1 0<br>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div class="t-header">
+      <div>
+        <p class="label">What people say</p>
+        <h2 class="section-title">From founders who've<br>been in your position</h2>
+      </div>
+      <p class="section-desc" style="max-width:38ch;">Service business owners who stopped waiting and started building.</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="t-card">
+        <div class="t-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="t-quote">"I'd been thinking about building this for over a year. KODEE had a working version in front of me in two weeks. I didn't write a single line of code."</p>
+        <div class="t-author">
+          <div class="t-avatar">JL</div>
+          <div>
+            <p class="t-name">Jamie L.</p>
+            <p class="t-role">Business Coach · Singapore</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="t-quote">"The first developer I spoke to quoted me $35,000. KODEE built exactly what I needed for a fraction of that — and it actually does what I asked for."</p>
+        <div class="t-author">
+          <div class="t-avatar">RN</div>
+          <div>
+            <p class="t-name">Rachel N.</p>
+            <p class="t-role">Agency Owner · Singapore</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-stars">
+          <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+        </div>
+        <p class="t-quote">"I was completely non-technical and had no idea where to start. Sam explained everything in plain English and we ended up with a tool my whole team uses daily."</p>
+        <div class="t-author">
+          <div class="t-avatar">DK</div>
+          <div>
+            <p class="t-name">David K.</p>
+            <p class="t-role">Consultant · Singapore</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" id="contact">
+  <div class="final-binary" aria-hidden="true">
+    <div>0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0</div>
+    <div>1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1</div>
+    <div>0 0 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1 0 0 1 1 0 1 0 1 0 1 1 0 0 1 0 1</div>
+    <div>1 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0 1 0 1 0 0 1 1 0 1 0 1 0 1 0 0 1 1 0 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 0</div>
+  </div>
+  <h2>You describe it.<br>We <span class="amber">build it.</span></h2>
+  <p>Start with a free 30-minute build call. No jargon. No pressure. Just a clear picture of what's possible for your business.</p>
+  <div class="final-actions">
+    <a href="#" class="btn-white">Book a free build call →</a>
+    <a href="#workshop" class="btn-ghost">Join the workshop instead</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-kodee">
+    k<span class="f-icon"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 4L2 8L5 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 4L14 8L11 12" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>dee
+  </span>
+  <p>© 2025 KODEE · Singapore</p>
+  <ul class="footer-links">
+    <li><a href="#">Privacy</a></li>
+    <li><a href="#">Terms</a></li>
+    <li><a href="https://linkedin.com">LinkedIn</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
